@@ -1,6 +1,8 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
+from email.utils import make_msgid
+import mimetypes
 
 
 def send_email(email, name, phone_number, datetime_start, branch):
@@ -11,6 +13,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
     em = EmailMessage()
     em['From'] = bcr_email
     em['To'] = email
+    image_cid = make_msgid()
     em.set_content(message)
     em.add_alternative("""
   <!DOCTYPE html
@@ -44,7 +47,6 @@ def send_email(email, name, phone_number, datetime_start, branch):
             font-weight: bold;
             color: #253342;
         }
-
         h1 {
             font-size: 56px;
         }
@@ -108,13 +110,8 @@ def send_email(email, name, phone_number, datetime_start, branch):
 
     <table role="presentation" width="100%" align="center" style="margin-bottom: 15px">
         <tr>
-            <td align="center" style="color: white;">
-                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="BCR.svg" align="middle"></a>
-            </td>
-        </tr>
-        <tr>
             <td  align="center" style="color: white;">
-                <img alt="Programare-vizita" src="BCR.png" width="450px"  align="middle" style="padding: 30px 30px 30px 30px;border-radius: 50px 50px 0px 0px;">
+                <img alt="Programare-vizita" src="https://i.imgur.com/5PKAWqs.png" width="450px"  align="middle" style="padding: 30px 30px 30px 30px;border-radius: 50px 50px 0px 0px;">
 <!--                <h2 style="position:absolute;color:white;top: 150px; right: 770px; font-weight: bold;">Programarea<br>ta la BCR!</h2>-->
             </td>
         </tr>
@@ -139,12 +136,12 @@ def send_email(email, name, phone_number, datetime_start, branch):
     <table role="presentation" border="0" cellpadding="0" width="100%" align="center" style="margin-bottom: 15px;">
         <tr>
             <td align="center">
-                <img alt="Programare-vizita" src="Bitmap.png" width="450px" style="padding: 30px 30px 30px 30px;">
+                <img alt="Programare-vizita" src="https://imgur.com/mqZ1ix7" width="450px" style="padding: 30px 30px 30px 30px;">
             </td>
         </tr>
         <tr>
             <td style="padding: 50px 50px 50px 80px;">
-                <a href="#" style="color: #1A67D2;text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-solid fa-location-arrow"></i>&nbsp&nbsp&nbsp&nbspAfiseaza traseul pe harta</a>
+                <a href="#" style="color: #1A67D2;text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/JHbmlR6.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAfiseaza traseul pe harta</a>
             </td>
         </tr>
     </table>
@@ -157,7 +154,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
         </tr>
         <tr>
             <td>
-                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-regular fa-calendar"></i>&nbsp&nbsp&nbsp&nbspAdauga in calendar</a>
+                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/PuEtWXr.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAdauga in calendar</a>
             </td>
         </tr>
     </table>
@@ -169,7 +166,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
         </tr>
         <tr>
             <td>
-                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-solid fa-trash"></i>&nbsp&nbsp&nbsp&nbspAnuleaza vizita</a>
+                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/Q3VoHR8.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAnuleaza vizita</a>
             </td>
         </tr>
     </table>
@@ -207,15 +204,15 @@ color: #5C7999;">Acest mesaj a fost generat automat, te rugam
         <table role="presentation" style="margin: auto; width: 50%">
             <tr align="center">
                 <td style="padding:10px; font-size: 40px; color: #5C7999;">
-                    <a href="https://www.facebook.com/BCR.Romania" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/BCR.Romania" target="_blank"><img src="https://i.imgur.com/VzhaVKk.jpg" width="50"/></a>
                 </td>
-                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://twitter.com/infobcr" target="_blank"><i class="fa-brands fa-twitter"></i></a></td>
+                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://twitter.com/infobcr" target="_blank"><img src="https://i.imgur.com/W4m4LTZ.jpg" width="50"/></a></td>
             <td>
 
-                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://www.instagram.com/georgepeinsta/?hl=ro" target="_blank"><i class="fa-brands fa-instagram"></i></a></td>
+                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://www.instagram.com/georgepeinsta/?hl=ro" target="_blank"><img src="https://i.imgur.com/Xu4oAi4.jpg" width="50"/></a></td>
 
                 <td style="padding:10px; font-size: 40px;color: #5C7999;">
-                    <a href="https://www.youtube.com/@BancaComercialaRomana" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@BancaComercialaRomana" target="_blank"><img src="https://i.imgur.com/7Qd0wfL.jpg" width="50"/></a>
                 </td>
             </tr>
         </table>
@@ -240,7 +237,7 @@ color: #21416C;">Banca Comerciala Romana</p>
     <table role="presentation" width="100%" align="center" style="margin-bottom: 40px">
         <tr>
             <td align="center" style="color: white;">
-                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="BCR.svg" align="middle"></a>
+                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="https://i.imgur.com/VQ8NAEZ.jpg" align="middle"></a>
             </td>
         </tr>
     </table>

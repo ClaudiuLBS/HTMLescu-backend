@@ -25,7 +25,9 @@ def get_user_location(request):
   g = GeoIP2()
   client_ip, _ = get_client_ip(request)
   city = unidecode(ts.google(g.city(client_ip)['city'], to_language='ro'))
-  return JsonResponse({'city': city})
+  latitude = g.city(client_ip)['latitude']
+  longitude = g.city(client_ip)['longitude']
+  return JsonResponse({'city': city, 'latitude': latitude, 'longitude': longitude })
 
 def get_cities(request):
   cities = [item.city for item in  Branch.objects.all()]
@@ -69,10 +71,10 @@ def get_available_intervals(request, unit_id):
       if lunch_start <= interval['dateTimeStart'] < lunch_end:
         continue
 
-      if lunch_start <= interval['dateTimeEnd'] <= lunch_end:
+      if lunch_start < interval['dateTimeEnd'] <= lunch_end:
         continue
 
-      if len(Appointment.objects.filter(unit_id=unit_id, datetime_start=interval['dateTimeStart'])) > 0:
+      if len(Appointment.objects.filter(pk=unit_id, datetime_start=interval['dateTimeStart'])) > 0:
         continue
       
       if interval['dateTimeEnd'] > day_end:
@@ -83,6 +85,3 @@ def get_available_intervals(request, unit_id):
       result['availableTimeList'].append(today_timeslots)
 
   return JsonResponse(result)
-
-# EMAIL LOGIN PASSWORD
-# asuqubtztnifhobm

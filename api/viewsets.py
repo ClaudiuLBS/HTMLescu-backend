@@ -2,22 +2,23 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Appointment, Branch
 from .serializers import AppointmentSerializer, BranchSerializer
-
+from datetime import datetime
 from email.message import EmailMessage
 import ssl
 import smtplib
-
+from unidecode import unidecode
 
 def send_email(email, name, phone_number, datetime_start, branch):
     message = 'Bai boschetarule plateste-ti ratele ca bag camatarii pe tine'
     bcr_email = 'bcr.cel.adevarat@gmail.com'
     bcr_password = 'asuqubtztnifhobm'
-
+    branchObj = Branch.objects.get(pk=branch)
+    dtm = datetime_start.split('T')[0] + ' ' + datetime_start.split('T')[1]
     em = EmailMessage()
     em['From'] = bcr_email
     em['To'] = email
     em.set_content(message)
-    em.add_alternative("""
+    em.add_alternative(f"""
   <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -40,41 +41,40 @@ def send_email(email, name, phone_number, datetime_start, branch):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style type="text/css">
-        body {
+        body {{
             font-family: 'Inter';
-        }
-        a {
+        }}
+        a {{
             text-decoration: underline;
             color: inherit;
             font-weight: bold;
             color: #253342;
-        }
-
-        h1 {
+        }}
+        h1 {{
             font-size: 56px;
-        }
+        }}
 
-        h2 {
+        h2 {{
             font-size: 28px;
             font-weight: 900;
-        }
+        }}
 
-        p {
+        p {{
             font-weight: 100;
             font-size: 20px;
-        }
+        }}
 
-        td {
+        td {{
             vertical-align: top;
-        }
+        }}
 
-        #email {
+        #email {{
             margin: auto;
             width: 600px;
             background-color: white;
-        }
+        }}
 
-        button {
+        button {{
             font: inherit;
             background-color: #FF7A59;
             border: none;
@@ -85,23 +85,23 @@ def send_email(email, name, phone_number, datetime_start, branch):
             color: white;
             border-radius: 5px;
             box-shadow: 3px 3px #d94c53;
-        }
+        }}
 
-        .subtle-link {
+        .subtle-link {{
             font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #CBD6E2;
-        }
-        .bold {
+        }}
+        .bold {{
             font-weight: bold;
-        }
-        .Description {
-            font-size: 28px;
-        }
-        .colorBlue {
+        }}
+        .Description {{
+            font-size: 20px;
+        }}
+        .colorBlue {{
             color: #1A67D2;
-        }
+        }}
     </style>
 
 </head>
@@ -113,13 +113,8 @@ def send_email(email, name, phone_number, datetime_start, branch):
 
     <table role="presentation" width="100%" align="center" style="margin-bottom: 15px">
         <tr>
-            <td align="center" style="color: white;">
-                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="BCR.svg" align="middle"></a>
-            </td>
-        </tr>
-        <tr>
             <td  align="center" style="color: white;">
-                <img alt="Programare-vizita" src="BCR.png" width="450px"  align="middle" style="padding: 30px 30px 30px 30px;border-radius: 50px 50px 0px 0px;">
+                <img alt="Programare-vizita" src="https://i.imgur.com/5PKAWqs.png" width="450px"  align="middle" style="padding: 30px 30px 30px 30px;border-radius: 50px 50px 0px 0px;">
 <!--                <h2 style="position:absolute;color:white;top: 150px; right: 770px; font-weight: bold;">Programarea<br>ta la BCR!</h2>-->
             </td>
         </tr>
@@ -128,28 +123,21 @@ def send_email(email, name, phone_number, datetime_start, branch):
     <table role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 50px 50px 50px 80px;">
         <tr>
             <td>
-                <p>Salut {Nume},</p>
+                <p>Salut {name},</p>
                 <p style="margin-top: 30px; margin-bottom: 30px;">
-                    Programarea ta la  <span class="bold">{sucursala}</span> este confirmata.
+                    Programarea ta la <span class="bold">{branchObj.name}</span> este confirmata.
                 </p>
                 <p class="bold" style="margin-bottom: 30px;">Detalii programare:</p>
-                <p>Scopul vizitei:  <span class="bold">{scop}</span></p>
-                <p>Locatie: <span class="bold">{locatie} </span></p>
-                <p>Data si interval orar: <span class="bold">{orar} </span></p>
-                <p>Adresa: <span class="bold">{adresa}</span></p>
+                <p>Locatie: <span class="bold">{branchObj.street}</span></p>
+                <p>Data si ora: <span class="bold">{dtm}</span></p>
             </td>
         </tr>
     </table>
 
     <table role="presentation" border="0" cellpadding="0" width="100%" align="center" style="margin-bottom: 15px;">
         <tr>
-            <td align="center">
-                <img alt="Programare-vizita" src="Bitmap.png" width="450px" style="padding: 30px 30px 30px 30px;">
-            </td>
-        </tr>
-        <tr>
             <td style="padding: 50px 50px 50px 80px;">
-                <a href="#" style="color: #1A67D2;text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-solid fa-location-arrow"></i>&nbsp&nbsp&nbsp&nbspAfiseaza traseul pe harta</a>
+                <a href="#" style="color: #1A67D2;text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/JHbmlR6.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAfiseaza traseul pe harta</a>
             </td>
         </tr>
     </table>
@@ -162,7 +150,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
         </tr>
         <tr>
             <td>
-                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-regular fa-calendar"></i>&nbsp&nbsp&nbsp&nbspAdauga in calendar</a>
+                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/PuEtWXr.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAdauga in calendar</a>
             </td>
         </tr>
     </table>
@@ -174,7 +162,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
         </tr>
         <tr>
             <td>
-                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><i class="fa-solid fa-trash"></i>&nbsp&nbsp&nbsp&nbspAnuleaza vizita</a>
+                <a href="#" style="color: #1A67D2; text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/Q3VoHR8.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAnuleaza vizita</a>
             </td>
         </tr>
     </table>
@@ -212,15 +200,15 @@ color: #5C7999;">Acest mesaj a fost generat automat, te rugam
         <table role="presentation" style="margin: auto; width: 50%">
             <tr align="center">
                 <td style="padding:10px; font-size: 40px; color: #5C7999;">
-                    <a href="https://www.facebook.com/BCR.Romania" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/BCR.Romania" target="_blank"><img src="https://i.imgur.com/VzhaVKk.jpg" width="50"/></a>
                 </td>
-                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://twitter.com/infobcr" target="_blank"><i class="fa-brands fa-twitter"></i></a></td>
+                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://twitter.com/infobcr" target="_blank"><img src="https://i.imgur.com/W4m4LTZ.jpg" width="50"/></a></td>
             <td>
 
-                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://www.instagram.com/georgepeinsta/?hl=ro" target="_blank"><i class="fa-brands fa-instagram"></i></a></td>
+                <td style="padding:10px; font-size: 40px;color: #5C7999;"><a href="https://www.instagram.com/georgepeinsta/?hl=ro" target="_blank"><img src="https://i.imgur.com/Xu4oAi4.jpg" width="50"/></a></td>
 
                 <td style="padding:10px; font-size: 40px;color: #5C7999;">
-                    <a href="https://www.youtube.com/@BancaComercialaRomana" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@BancaComercialaRomana" target="_blank"><img src="https://i.imgur.com/7Qd0wfL.jpg" width="50"/></a>
                 </td>
             </tr>
         </table>
@@ -245,7 +233,7 @@ color: #21416C;">Banca Comerciala Romana</p>
     <table role="presentation" width="100%" align="center" style="margin-bottom: 40px">
         <tr>
             <td align="center" style="color: white;">
-                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="BCR.svg" align="middle"></a>
+                <a href="www.bcr.ro" target="_blank"><img alt="Logo BCR" src="https://i.imgur.com/VQ8NAEZ.jpg" align="middle"></a>
             </td>
         </tr>
     </table>
