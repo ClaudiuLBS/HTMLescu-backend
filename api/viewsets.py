@@ -107,7 +107,7 @@ def send_email(email, name, phone_number, datetime_start, branch):
 </head>
 
 <body
-      style="width: 100%; margin: auto 0; padding:0; font-family:Lato, sans-serif; font-size:18px; color:#33475B; word-break:break-word; background-color: black;">
+      style="width: 100%; margin: auto 0; padding:0; font-family:Lato, sans-serif; font-size:18px; color:#33475B; word-break:break-word; background-color: gray;">
 
 <div id="email">
 

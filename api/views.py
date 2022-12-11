@@ -51,7 +51,8 @@ def get_available_intervals(request, unit_id):
   start_time = datetime.now().replace(minute=0, hour=0, second=0, microsecond=0) # luam din request
   branch = Branch.objects.get(pk=unit_id)
   branch_schedule = branch.appointment_schedule
-
+  now = datetime.now()
+  print(now)
   result = {"availableTimeList": []}
   for i in range(0, 14):
     current_day = start_time + timedelta(days=i)
@@ -68,6 +69,9 @@ def get_available_intervals(request, unit_id):
     for j in range(30):
       interval = get_interval(add_minutes(current_day, 30*j))
       
+      if interval['dateTimeStart'] < now:
+        continue
+
       if lunch_start <= interval['dateTimeStart'] < lunch_end:
         continue
 
