@@ -1,0 +1,146 @@
+[
+  {
+    "operationId": 1,
+    "operationType": "Depunere sau retragere de bani",
+    "operationDescription": "Schimb valutar, alimentare produs de economisire, alte operatiuni cu numerar.",
+    "durationMinutes": 25,
+    "isFastArea": true,
+    "isNormalArea": false,
+    "active": true
+  },
+  {
+    "operationId": 10,
+    "operationType": "Plata rata credit",
+    "operationDescription": "Plata ratelor pentru toate tipurile de credit",
+    "durationMinutes": 25,
+    "isFastArea": true,
+    "isNormalArea": false,
+    "active": true
+  },
+  {
+    "operationId": 2,
+    "operationType": "Operatiune fara numerar",
+    "operationDescription": "Cont curent, card de debit, tranzactii, George si servicii digitale, administrare cont si card.",
+    "durationMinutes": 20,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 12,
+    "operationType": "Deschidere cont curent",
+    "operationDescription": "Deschidere cont curent",
+    "durationMinutes": 20,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 8,
+    "operationType": "Deschidere cont minori",
+    "operationDescription": "Deschidere cont persoane sub 18 ani.",
+    "durationMinutes": 30,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 17,
+    "operationType": "Deschidere conturi refugiati",
+    "operationDescription": "Deschidere conturi refugiati",
+    "durationMinutes": 60,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 16,
+    "operationType": "Suport utilizare aplicatie George",
+    "operationDescription": "Activare George (etoken), servicii",
+    "durationMinutes": 15,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 15,
+    "operationType": "Diagnostic financiar gratuit",
+    "operationDescription": "Diagnostic financiar gratuit",
+    "durationMinutes": 45,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 7,
+    "operationType": "Credit de nevoi personale",
+    "operationDescription": "Inclusiv card credit si descoperit de cont.",
+    "durationMinutes": 30,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 3,
+    "operationType": "Credit ipotecar",
+    "operationDescription": "Casa Mea, Noua Casa",
+    "durationMinutes": 60,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 4,
+    "operationType": "Economisire",
+    "operationDescription": "Depozit, cont de economii.",
+    "durationMinutes": 20,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 11,
+    "operationType": "Contracte BpL",
+    "operationDescription": "Banca pentru Locuinte",
+    "durationMinutes": 40,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 13,
+    "operationType": "Investitii - subscriere",
+    "operationDescription": "Fonduri mutuale, Capital Plan, Titluri de stat, Obligatiuni structurate, Aur (lingouri si monede) etc.",
+    "durationMinutes": 30,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 14,
+    "operationType": "Investitii - rascumparare",
+    "operationDescription": "Fonduri mutuale, Capital Plan, Titluri de stat, Obligatiuni structurate, Aur (lingouri si monede) etc.",
+    "durationMinutes": 30,
+    "isFastArea": false,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 5,
+    "operationType": "Asigurare",
+    "operationDescription": "Viata, casa, bunuri.",
+    "durationMinutes": 30,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  },
+  {
+    "operationId": 6,
+    "operationType": "Pensie privata",
+    "operationDescription": "Pilon 3 de la BCR Pensii.",
+    "durationMinutes": 30,
+    "isFastArea": true,
+    "isNormalArea": true,
+    "active": true
+  }
+]

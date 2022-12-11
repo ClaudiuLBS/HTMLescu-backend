@@ -1,0 +1,2 @@
+GET https://8f6a-141-85-150-233.eu.ngrok.io/api/close-branches/?lat=44.439663&long=26.096306&radius=10
+Content-Type: application/json
