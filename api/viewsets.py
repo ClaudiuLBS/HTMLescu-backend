@@ -134,14 +134,6 @@ def send_email(email, name, phone_number, datetime_start, branch):
         </tr>
     </table>
 
-    <table role="presentation" border="0" cellpadding="0" width="100%" align="center" style="margin-bottom: 15px;">
-        <tr>
-            <td style="padding: 50px 50px 50px 80px;">
-                <a href="#" style="color: #1A67D2;text-decoration: none;font-weight: bold; font-size:20px;"><img src="https://i.imgur.com/JHbmlR6.jpg" width="20" height="20"/>&nbsp&nbsp&nbsp&nbspAfiseaza traseul pe harta</a>
-            </td>
-        </tr>
-    </table>
-
     <table role="presentation" border="0" border="0" cellpadding="0" width="100%" align="center" style="margin-bottom: 15px;padding: 0px 50px 50px 80px;">
         <tr>
             <td>
